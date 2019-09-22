@@ -12,6 +12,9 @@ export default new Vuex.Store({
     signIn(state, userLogged) {
       state.userLogged = userLogged;
     },
+    signOut(state) {
+      state.userLogged = '';
+    },
   },
   getters: {
     userLogged: state => state.userLogged,

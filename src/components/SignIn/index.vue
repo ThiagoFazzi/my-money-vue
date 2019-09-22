@@ -2,10 +2,10 @@
   <v-container fluid>
     <v-layout row>
       <v-flex xs12 sm4 offset-sm4 style="marginTop: 200px">
-        <v-card>
+        <v-card class="mx-auto pb-4 pt-4">
           <v-flex xs12 sm10 offset-sm1>
             <v-card-title primary-title>
-              <h3 class="headline mb-0">SignIn</h3>
+              <h3 class="headline mb-0">Sign In</h3>
             </v-card-title>
           </v-flex>
           <v-container>
