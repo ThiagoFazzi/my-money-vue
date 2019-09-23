@@ -26,6 +26,8 @@ export default {
                   _id
                   userName
                   email
+                  photo
+                  createdDate
                 }
               }
             }`,
@@ -43,7 +45,6 @@ export default {
         .then(resp => {
           const { data } = resp;
           if (data.data.signIn) {
-            //console.log(data.data.signIn);
             this.$store.commit("signIn", data.data.signIn);
             this.$router.replace("/");
           } else {
