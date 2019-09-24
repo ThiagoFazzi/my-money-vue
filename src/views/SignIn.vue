@@ -3,11 +3,11 @@
 </template>
 
 <script>
-import axios from "axios";
-import SignIn from "../components/SignIn";
+import axios from 'axios'
+import SignIn from '../components/SignIn'
 
 export default {
-  name: "signIn",
+  name: 'signIn',
   components: {
     SignIn
   },
@@ -44,18 +44,18 @@ export default {
           }
         )
         .then(resp => {
-          const { data } = resp;
+          const { data } = resp
           if (data.data.signIn) {
-            this.$store.commit("signIn", data.data.signIn);
-            this.$router.replace("/");
+            this.$store.commit("signIn", data.data.signIn)
+            this.$router.replace('/')
           } else {
-            this.$router.replace("signup");
+            this.$router.replace('signup')
           }
         })
         .catch(error => {
-          throw error;
-        });
+          throw error
+        })
     }
   }
-};
+}
 </script>

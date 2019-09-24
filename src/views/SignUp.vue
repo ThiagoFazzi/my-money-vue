@@ -3,11 +3,11 @@
 </template>
 
 <script>
-import SignUp from "../components/SignUp";
-import axios from "axios";
+import SignUp from '../components/SignUp'
+import axios from 'axios'
 
 export default {
-  name: "signUp",
+  name: 'signUp',
   components: {
     SignUp
   },
@@ -15,7 +15,7 @@ export default {
     signUp(newUser) {
       axios
         .post(
-          "http://localhost:3000/graphql",
+          'http://localhost:3000/graphql',
           {
             query: `mutation getSignUp($email: String!, $password: String!, $userName: String!) { 
             createUser(userInput: {email: $email, password: $password, userName: $userName}) { 
@@ -32,19 +32,19 @@ export default {
           },
           {
             headers: {
-              "Content-Type": "application/json"
+              'Content-Type': 'application/json'
             }
           }
         )
         .then(resp => {
           if (resp.data.data.createUser._id) {
-            this.$router.replace("/");
+            this.$router.replace('/')
           }
         })
         .catch(error => {
-          throw error;
-        });
+          throw error
+        })
     }
   }
-};
+}
 </script>

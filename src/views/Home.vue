@@ -10,11 +10,11 @@
 
 <script>
 export default {
-  name: "home",
+  name: 'home',
   created() {
     if (!this.$store.getters.userLogged.userId) {
-      this.$router.replace("signIn");
+      this.$router.replace('signIn');
     }
   }
-};
+}
 </script>

@@ -42,41 +42,41 @@
 
 <script>
 export default {
-  name: "SignUp",
+  name: 'SignUp',
   data() {
     return {
-      email: "",
-      userName: "",
-      password: "",
-      passwordCheck: ""
-    };
+      email: '',
+      userName: '',
+      password: '',
+      passwordCheck: ''
+    }
   },
   computed: {
     reset() {
-      this.email = "";
-      this.userName = "";
-      this.password = "";
+      this.email = ''
+      this.userName = ''
+      this.password = ''
     }
   },
   methods: {
     signUp() {
       if (this.password !== this.passwordCheck) {
-        console.log("password not match");
+        console.log("password not match")
       } else {
         if (this.email && this.password && this.userName) {
           const newUser = {
             email: this.email,
             userName: this.userName,
             password: this.password
-          };
-          this.$emit("signUp", newUser);
-          this.reset;
+          }
+          this.$emit('signUp', newUser)
+          this.reset
         }
       }
     },
     clearInputs() {
-      this.reset;
+      this.reset
     }
   }
-};
+}
 </script>
