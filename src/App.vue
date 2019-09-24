@@ -19,7 +19,9 @@
             <v-list-item-title text>{{ userLogged }}</v-list-item-title>
           </v-list-item>
           <v-list-item>
-            <v-btn text>Profile</v-btn>
+            <v-btn text>
+              <router-link :to="{ name: 'profile'}">Profile</router-link>
+            </v-btn>
           </v-list-item>
           <v-divider inset></v-divider>
           <v-list-item>
