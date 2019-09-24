@@ -28,6 +28,7 @@ export default {
                   email
                   photo
                   createdDate
+                  updatedDate
                 }
               }
             }`,

@@ -15,6 +15,9 @@ export default new Vuex.Store({
     signOut(state) {
       state.userLogged = '';
     },
+    updateUser(state, user) {
+      state.userLogged.user = user;
+    },
   },
   getters: {
     userLogged: state => state.userLogged,
