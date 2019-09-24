@@ -38,27 +38,27 @@
 </template>
 
 <script>
-//import Home from "./views/Home.vue";
+
 export default {
-  name: "App",
+  name: 'App',
   components: {
-    //Home
+
   },
   data: () => ({
-    //
+
   }),
   computed: {
     userLogged() {
       if (this.$store.getters.userLogged) {
-        return this.$store.getters.userLogged.user.userName;
+        return this.$store.getters.userLogged.user.userName
       }
     }
   },
   methods: {
     signOut() {
-      this.$store.commit("signOut");
-      this.$router.replace("/signIn");
+      this.$store.commit('signOut')
+      this.$router.replace('/signIn')
     }
   }
-};
+}
 </script>

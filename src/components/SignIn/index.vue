@@ -42,12 +42,12 @@
 
 <script>
 export default {
-  name: "SignIn",
+  name: 'SignIn',
   data() {
     return {
-      email: "",
-      password: ""
-    };
+      email: '',
+      password: ''
+    }
   },
   methods: {
     handleSignIn() {
@@ -55,16 +55,15 @@ export default {
         const signInCredentials = {
           email: this.email,
           password: this.password
-        };
-        this.$emit("signIn", signInCredentials);
-        this.email = "";
-        this.password = "";
+        }
+        this.$emit('signIn', signInCredentials)
+        this.clearInputs()
       }
     },
     clearInputs() {
-      this.email = "";
-      this.password = "";
+      this.email = ''
+      this.password = ''
     }
   }
-};
+}
 </script>
