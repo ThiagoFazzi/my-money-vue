@@ -6,7 +6,6 @@
         <span class="font-weight-light">money</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <!--<v-toolbar-items class="hidden-sm-and-down">-->
       <v-menu bottom right v-if="userLogged">
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
@@ -29,7 +28,6 @@
           </v-list-item>
         </v-list>
       </v-menu>
-      <!--</v-toolbar-items>-->
     </v-app-bar>
     <v-content>
       <router-view></router-view>
