@@ -9,7 +9,9 @@
       <v-menu bottom right v-if="userLogged">
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
-            <v-icon>mdi-account-circle-outline</v-icon>
+            <v-avatar size="36">
+              <img :src="$store.getters.userLogged.user.photo" alt="avatar" />
+            </v-avatar>            
           </v-btn>
         </template>
 
