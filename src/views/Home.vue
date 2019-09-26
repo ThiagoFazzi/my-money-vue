@@ -10,7 +10,7 @@ export default {
     Home
   },
   created() {
-    if (!this.$store.getters.userLogged.userId) {
+    if (!this.$store.getters.USER_LOGGED.userId) {
       this.$router.replace('signIn');
     }
   }
