@@ -6,11 +6,12 @@
         <span class="font-weight-light">money</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <!--<v-toolbar-items class="hidden-sm-and-down">-->
       <v-menu bottom right v-if="userLogged">
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
-            <v-icon>mdi-account-circle-outline</v-icon>
+            <v-avatar size="36">
+              <img :src="$store.getters.userLogged.user.photo" alt="avatar" />
+            </v-avatar>
           </v-btn>
         </template>
 
@@ -29,7 +30,6 @@
           </v-list-item>
         </v-list>
       </v-menu>
-      <!--</v-toolbar-items>-->
     </v-app-bar>
     <v-content>
       <router-view></router-view>
@@ -38,27 +38,27 @@
 </template>
 
 <script>
-//import Home from "./views/Home.vue";
+
 export default {
-  name: "App",
+  name: 'App',
   components: {
-    //Home
+
   },
   data: () => ({
-    //
+
   }),
   computed: {
     userLogged() {
       if (this.$store.getters.userLogged) {
-        return this.$store.getters.userLogged.user.userName;
+        return this.$store.getters.userLogged.user.userName
       }
     }
   },
   methods: {
     signOut() {
-      this.$store.commit("signOut");
-      this.$router.replace("/signIn");
+      this.$store.commit('signOut')
+      this.$router.replace('/signIn')
     }
   }
-};
+}
 </script>

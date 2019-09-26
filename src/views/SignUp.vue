@@ -3,48 +3,27 @@
 </template>
 
 <script>
-import SignUp from "../components/SignUp";
-import axios from "axios";
+import SignUp from '../components/SignUp'
 
 export default {
-  name: "signUp",
+  name: 'signUp',
   components: {
     SignUp
   },
   methods: {
     signUp(newUser) {
-      axios
-        .post(
-          "http://localhost:3000/graphql",
-          {
-            query: `mutation getSignUp($email: String!, $password: String!, $userName: String!) { 
-            createUser(userInput: {email: $email, password: $password, userName: $userName}) { 
-              _id
-              email
-              userName
-            }
-          }`,
-            variables: {
-              email: newUser.email,
-              password: newUser.password,
-              userName: newUser.userName
-            }
-          },
-          {
-            headers: {
-              "Content-Type": "application/json"
-            }
-          }
-        )
-        .then(resp => {
-          if (resp.data.data.createUser._id) {
-            this.$router.replace("/");
+      console.log(newUser)
+      this.$store.dispatch('signUp', newUser)
+        .then(response => {
+          if (response.data.createUser) {
+            this.$router.replace("signIn")
           }
         })
         .catch(error => {
-          throw error;
-        });
+          throw Error(error)
+        })
+
     }
   }
-};
+}
 </script>

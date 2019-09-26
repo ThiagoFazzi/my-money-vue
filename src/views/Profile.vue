@@ -3,17 +3,17 @@
 </template>
 
 <script>
-import axios from "axios";
-import Profile from "../components/Profile";
+import axios from 'axios'
+import Profile from '../components/Profile'
 
 export default {
-  name: "profile",
+  name: 'profile',
   components: {
     Profile
   },
   computed: {
     setUser() {
-      return this.$store.getters.userLogged.user;
+      return this.$store.getters.userLogged.user
     }
   },
   methods: {
@@ -39,21 +39,20 @@ export default {
           },
           {
             headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${this.$store.getters.userLogged.token}`
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${this.$store.getters.userLogged.token}`
             }
           }
         )
         .then(resp => {
           if (resp.data.data.updateUser._id) {
-            console.log(resp.data.data.updateUser);
-            this.$store.commit("updateUser", resp.data.data.updateUser);
+            this.$store.commit('updateUser', resp.data.data.updateUser)
           }
         })
         .catch(error => {
-          throw error;
-        });
+          throw error
+        })
     }
   }
-};
+}
 </script>
