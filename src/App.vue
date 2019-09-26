@@ -11,7 +11,7 @@
           <v-btn icon v-on="on">
             <v-avatar size="36">
               <img :src="$store.getters.userLogged.user.photo" alt="avatar" />
-            </v-avatar>            
+            </v-avatar>
           </v-btn>
         </template>
 
