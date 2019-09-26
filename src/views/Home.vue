@@ -1,16 +1,14 @@
 <template>
-  <v-container fluid>
-    <v-layout row>
-      <v-flex xs4>
-        <h1>Home</h1>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <Home />
 </template>
 
 <script>
+import Home from '../components/Home'
 export default {
   name: 'home',
+  components: {
+    Home
+  },
   created() {
     if (!this.$store.getters.userLogged.userId) {
       this.$router.replace('signIn');

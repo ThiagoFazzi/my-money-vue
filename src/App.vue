@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <Toolbar />
-    <v-content>
+    <v-content class="background">
       <router-view></router-view>
     </v-content>
   </v-app>
@@ -16,3 +16,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.background {
+  background-color: #cfcfcf;
+}
+</style>
