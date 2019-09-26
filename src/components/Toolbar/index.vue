@@ -9,7 +9,12 @@
       <template v-slot:activator="{ on }">
         <v-btn icon v-on="on">
           <v-avatar size="36">
-            <img :src="$store.getters.userLogged.user.photo" alt="avatar" />
+            <img
+              v-if="$store.getters.userLogged.user.photo"
+              :src="$store.getters.userLogged.user.photo"
+              alt="avatar"
+            />
+            <v-icon v-if="!$store.getters.userLogged.user.photo">mdi-account-circle-outline</v-icon>
           </v-avatar>
         </v-btn>
       </template>
@@ -18,11 +23,9 @@
           <v-list-item-title text>{{ userLogged }}</v-list-item-title>
         </v-list-item>
         <v-list-item>
-          <v-btn text>
-            <router-link :to="{ name: 'profile'}">Profile</router-link>
-          </v-btn>
+          <v-btn text :to="{ name: 'profile'}">Profile</v-btn>
         </v-list-item>
-        <v-divider inset></v-divider>
+        <v-divider></v-divider>
         <v-list-item>
           <v-btn text @click="signOut">Sign Out</v-btn>
         </v-list-item>
@@ -39,7 +42,7 @@ export default {
       if (this.$store.getters.userLogged) {
         return this.$store.getters.userLogged.user.userName
       }
-    }
+    },
   },
   methods: {
     signOut() {

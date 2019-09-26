@@ -31,7 +31,7 @@
           <v-card-actions>
             <v-flex xs12 sm10 offset-sm1>
               <v-btn color="primary" @click="signUp">Sign Up</v-btn>
-              <v-btn color="secondary" @click="clearInputs">clear</v-btn>
+              <v-btn color="secundary" @click="clearInputs">clear</v-btn>
             </v-flex>
           </v-card-actions>
         </v-card>
