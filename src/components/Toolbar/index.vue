@@ -10,11 +10,11 @@
         <v-btn icon v-on="on">
           <v-avatar size="36">
             <img
-              v-if="$store.getters.userLogged.user.photo"
-              :src="$store.getters.userLogged.user.photo"
+              v-if="$store.getters.USER_LOGGED.user.photo"
+              :src="$store.getters.USER_LOGGED.user.photo"
               alt="avatar"
             />
-            <v-icon v-if="!$store.getters.userLogged.user.photo">mdi-account-circle-outline</v-icon>
+            <v-icon v-if="!$store.getters.USER_LOGGED.user.photo">mdi-account-circle-outline</v-icon>
           </v-avatar>
         </v-btn>
       </template>
@@ -39,8 +39,8 @@ export default {
   name: 'Toolbar',
   computed: {
     userLogged() {
-      if (this.$store.getters.userLogged) {
-        return this.$store.getters.userLogged.user.userName
+      if (this.$store.getters.USER_LOGGED) {
+        return this.$store.getters.USER_LOGGED.user.userName
       }
     },
   },

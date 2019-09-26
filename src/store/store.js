@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import { signIn } from './actions/signIn';
 import { signUp } from './actions/signUp';
+import { updateUser } from './actions/updateUser';
 
 Vue.use(Vuex);
 
@@ -11,25 +12,27 @@ export default new Vuex.Store({
     userLogged: '',
   },
   mutations: {
-    signIn(state, userLogged) {
+    SIGN_IN(state, userLogged) {
       state.userLogged = userLogged;
     },
-    signOut(state) {
+    SIGN_OUT(state) {
       state.userLogged = '';
     },
-    updateUser(state, user) {
+    UPDATE_USER(state, user) {
       state.userLogged.user = user;
     },
   },
   getters: {
-    userLogged: state => state.userLogged,
+    USER_LOGGED: state => state.userLogged,
+    USER_TOKEN: state => state.userLogged.token,
   },
   actions: {
     signOut(context) {
-      context.commit('signOut');
+      context.commit('SIGN_OUT');
       return 'signOut';
     },
     signIn,
     signUp,
+    updateUser,
   },
 });

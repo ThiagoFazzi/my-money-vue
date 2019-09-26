@@ -33,7 +33,7 @@ export const signIn = async (context, { email, password }) => {
       },
     );
     if (response.status === 200) {
-      context.commit('signIn', response.data.data.signIn);
+      context.commit('SIGN_IN', response.data.data.signIn);
     }
     return response.data;
   } catch (error) {

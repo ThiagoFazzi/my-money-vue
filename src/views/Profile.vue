@@ -13,44 +13,19 @@ export default {
   },
   computed: {
     setUser() {
-      return this.$store.getters.userLogged.user
+      return this.$store.getters.USER_LOGGED.user
     }
   },
   methods: {
     updateProfile(user) {
-      axios
-        .post(
-          "http://localhost:3000/graphql",
-          {
-            query: `mutation update($userName: String!, $photo: String!) { 
-            updateUser(userProfileInput: {userName: $userName, photo: $photo}) { 
-              _id
-              email
-              userName
-              photo
-              createdDate
-              updatedDate
-            }
-          }`,
-            variables: {
-              photo: user.photo,
-              userName: user.userName
-            }
-          },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${this.$store.getters.userLogged.token}`
-            }
-          }
-        )
-        .then(resp => {
-          if (resp.data.data.updateUser._id) {
-            this.$store.commit('updateUser', resp.data.data.updateUser)
+      this.$store.dispatch('updateUser', user)
+        .then((response) => {
+          if (response.data.updateUser) {
+            console.log(response.data.updateUser)
           }
         })
-        .catch(error => {
-          throw error
+        .catch((error) => {
+          throw error;
         })
     }
   }
