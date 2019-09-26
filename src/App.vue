@@ -1,36 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>My</span>
-        <span class="font-weight-light">money</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-menu bottom right v-if="userLogged">
-        <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on">
-            <v-avatar size="36">
-              <img :src="$store.getters.userLogged.user.photo" alt="avatar" />
-            </v-avatar>
-          </v-btn>
-        </template>
-
-        <v-list>
-          <v-list-item>
-            <v-list-item-title text>{{ userLogged }}</v-list-item-title>
-          </v-list-item>
-          <v-list-item>
-            <v-btn text>
-              <router-link :to="{ name: 'profile'}">Profile</router-link>
-            </v-btn>
-          </v-list-item>
-          <v-divider inset></v-divider>
-          <v-list-item>
-            <v-btn text @click="signOut">Sign Out</v-btn>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-    </v-app-bar>
+    <Toolbar />
     <v-content>
       <router-view></router-view>
     </v-content>
@@ -38,27 +8,11 @@
 </template>
 
 <script>
-
+import Toolbar from './components/Toolbar'
 export default {
   name: 'App',
   components: {
-
+    Toolbar
   },
-  data: () => ({
-
-  }),
-  computed: {
-    userLogged() {
-      if (this.$store.getters.userLogged) {
-        return this.$store.getters.userLogged.user.userName
-      }
-    }
-  },
-  methods: {
-    signOut() {
-      this.$store.commit('signOut')
-      this.$router.replace('/signIn')
-    }
-  }
 }
 </script>
