@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import SignIn from '../components/SignIn'
 
 export default {
@@ -11,9 +12,12 @@ export default {
     SignIn
   },
   methods: {
+    ...mapActions(['SIGN_IN']),
     signIn(user) {
-      this.$store.dispatch('signIn', user)
+      this.SIGN_IN(user)
+        //this.$store.dispatch('SIGN_IN', user)
         .then(response => {
+          console.log(response)
           if (response.data.signIn) {
             this.$router.replace('home')
           } else {

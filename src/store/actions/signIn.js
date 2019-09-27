@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 
-export const signIn = async (context, { email, password }) => {
+export const SIGN_IN = async (context, { email, password }) => {
   try {
     const response = await axios.post(
       'http://localhost:3000/graphql',

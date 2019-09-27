@@ -1,5 +1,3 @@
-/* eslint-disable quote-props */
-/* eslint-disable consistent-return */
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 
