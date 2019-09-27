@@ -1,8 +1,9 @@
+/* eslint-disable quote-props */
 /* eslint-disable consistent-return */
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 
-export const updateUser = async (context, { photo, userName, token }) => {
+export const updateUser = async (context, { photo, userName }) => {
   try {
     const response = await axios.post(
       'http://localhost:3000/graphql',
@@ -25,11 +26,12 @@ export const updateUser = async (context, { photo, userName, token }) => {
       {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${context.getters.USER_TOKEN}`,
         },
       },
     );
     if (response.status === 200) {
+      console.log(response);
       context.commit('UPDATE_USER', response.data.data.updateUser);
       return response.data;
     }
