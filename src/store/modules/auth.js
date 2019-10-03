@@ -1,7 +1,6 @@
 // import { SIGN_IN } from '../actions/signIn';
 import axios from "axios";
 import { signUp } from "../actions/signUp";
-import USER_REQUEST from "./user";
 
 function transformData(string) {
   return JSON.parse(string);
@@ -15,10 +14,8 @@ const state = {
 const getters = {
   isAuthenticated: state => !!state.auth.token,
   status: state => state.status,
-  userId: state => state.auth.userId,
+  getUserId: state => state.auth.userId,
   getToken: state => state.auth.token
-  //GET_AUTH: state => state.auth,
-  //GET_TOKEN: state => state.auth.token
 };
 
 const actions = {
@@ -27,7 +24,7 @@ const actions = {
     localStorage.removeItem("auth");
     return "signOut";
   },
-  async AUTH_REQUEST({ commit, dispatch }, { email, password }) {
+  async AUTH_REQUEST({ commit, dispatch, getters }, { email, password }) {
     try {
       const response = await axios.post(
         "http://localhost:3000/graphql",
@@ -53,7 +50,7 @@ const actions = {
       if (response.status === 200) {
         localStorage.setItem("auth", JSON.stringify(response.data.data.signIn));
         commit("AUTH_SUCCESS", response.data.data.signIn);
-        //dispatch(USER_REQUEST);
+        dispatch("USER_REQUEST", getters.getUserId);
       }
       return response.data;
     } catch (error) {

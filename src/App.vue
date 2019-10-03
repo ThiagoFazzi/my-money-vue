@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Toolbar />
+    <Toolbar v-if="getUserId" />
     <v-content class="background">
       <router-view></router-view>
     </v-content>
@@ -9,7 +9,7 @@
 
 <script>
 import Toolbar from "./components/Toolbar";
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "App",
@@ -17,15 +17,12 @@ export default {
     Toolbar
   },
   computed: {
-    ...mapGetters(["GET_AUTH"])
-  },
-  methods: {
-    ...mapActions(["AUTH_REQUEST"])
+    ...mapGetters(["getUserId"])
   }
 };
 </script>
 
-<style scoped>
+<style>
 .background {
   background-color: #cfcfcf;
 }

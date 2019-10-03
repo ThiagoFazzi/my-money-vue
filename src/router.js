@@ -4,6 +4,7 @@ import Home from "./views/Home.vue";
 import SignIn from "./views/SignIn.vue";
 import SignUp from "./views/SignUp.vue";
 import Profile from "./views/Profile.vue";
+import Dashboard from "./views/Dashboard.vue";
 
 Vue.use(Router);
 
@@ -13,13 +14,13 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "signin",
-      component: SignIn
+      name: "/",
+      component: Home
     },
     {
-      path: "/home",
-      name: "home",
-      component: Home
+      path: "/signin",
+      name: "signin",
+      component: SignIn
     },
     {
       path: "/signUp",
@@ -30,6 +31,11 @@ export default new Router({
       path: "/profile",
       name: "profile",
       component: Profile
+    },
+    {
+      path: "/dashboard",
+      name: "dashboard",
+      component: Dashboard
     }
   ]
 });

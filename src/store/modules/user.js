@@ -1,24 +1,22 @@
 import axios from "axios";
 
-//import { updateUser } from "../actions/updateUser";
-
 const state = {
   user: ""
 };
 
 const getters = {
-  getUser: state => state.user
+  getUser: state => state.user,
+  getUserName: state => state.user.userName
 };
 
 const actions = {
   async USER_REQUEST({ getters, commit }, userId) {
     try {
-      console.log("entrei no user request");
       const response = await axios.post(
         "http://localhost:3000/graphql",
         {
-          query: `query user($userId: String!) { 
-            getUser(id: $userId) { 
+          query: `query queryUser($userId: String!) { 
+            getUser(userIdInput: {userId: $userId}) { 
               _id
               userName
               photo
@@ -39,18 +37,17 @@ const actions = {
         }
       );
       if (response.status === 200) {
-        commit("GET_USER_SUCCESS", response.data.data.getUser);
+        commit("SET_USER_SUCCESS", response.data.data.getUser);
       }
       return response.data;
     } catch (error) {
-      //commit("USER_ERROR", error);
       throw error;
     }
   }
 };
 
 const mutations = {
-  GET_USER_SUCCESS(state, user) {
+  SET_USER_SUCCESS(state, user) {
     state.user = user;
   }
 };

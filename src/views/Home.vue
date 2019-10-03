@@ -1,12 +1,12 @@
 <template>
   <div>
-    <Home />
+    <Home v-if="isAuthenticated" />
   </div>
 </template>
 
 <script>
 import Home from "../components/Home";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "home",
@@ -14,16 +14,17 @@ export default {
     Home
   },
   computed: {
-    ...mapGetters(["isAuthenticated"])
-    //getAuth() {
-    //  console.log("home");
-    //  console.log(this.GET_AUTH);
-    //  return this.GET_AUTH;
-    //}
+    ...mapGetters(["isAuthenticated", "getUserId"])
+  },
+  methods: {
+    ...mapActions(["USER_REQUEST"])
   },
   created() {
-    if (this.isAuthenticated) {
-      //this.$router.push("signIn");
+    if (!this.isAuthenticated) {
+      this.$router.replace("signin");
+    } else {
+      this.USER_REQUEST(this.getUserId);
+      this.$router.push("dashboard");
     }
   }
 };

@@ -11,28 +11,20 @@ export default {
   components: {
     SignIn
   },
-  computed: {
-    ...mapGetters(["isAuthenticated", "userId"])
-  },
   methods: {
-    ...mapActions(["AUTH_REQUEST", "USER_REQUEST"]),
+    ...mapActions(["AUTH_REQUEST"]),
     signIn(user) {
-      this.AUTH_REQUEST(user).then(response => {
-        if (response.data.signIn) {
-          this.$router.push("/home");
-        } else {
-          this.$router.replace("/signup");
-        }
-      });
-    }
-  },
-  created() {
-    if (this.isAuthenticated) {
-      console.log(" passei pelo signin");
-      this.USER_REQUEST(this.userId).then(response => {
-        console.log(response.data);
-        this.$router.push("/home");
-      });
+      this.AUTH_REQUEST(user)
+        .then(response => {
+          if (response.data.signIn) {
+            this.$router.push("dashboard");
+          } else {
+            this.$router.replace("/signup");
+          }
+        })
+        .catch(error => {
+          throw error;
+        });
     }
   }
 };
