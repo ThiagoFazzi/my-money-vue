@@ -1,10 +1,10 @@
 /* eslint-disable import/prefer-default-export */
-import axios from 'axios';
+import axios from "axios";
 
 export const SIGN_IN = async (context, { email, password }) => {
   try {
     const response = await axios.post(
-      'http://localhost:3000/graphql',
+      "http://localhost:3000/graphql",
       {
         query: `query signin($email: String!, $password: String!) { 
           signIn(email: $email, password: $password) { 
@@ -23,18 +23,19 @@ export const SIGN_IN = async (context, { email, password }) => {
         }`,
         variables: {
           email,
-          password,
-        },
+          password
+        }
       },
       {
         headers: {
-          'Content-Type': 'application/json',
-        },
-      },
+          "Content-Type": "application/json"
+        }
+      }
     );
     if (response.status === 200) {
-      context.commit('SIGN_IN', response.data.data.signIn);
+      context.commit("SIGN_IN", response.data.data.signIn);
     }
+    console.log(response.data);
     return response.data;
   } catch (error) {
     throw error;

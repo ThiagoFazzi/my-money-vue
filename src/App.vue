@@ -8,13 +8,21 @@
 </template>
 
 <script>
-import Toolbar from './components/Toolbar'
+import Toolbar from "./components/Toolbar";
+import { mapGetters, mapActions } from "vuex";
+
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Toolbar
   },
-}
+  computed: {
+    ...mapGetters(["GET_AUTH"])
+  },
+  methods: {
+    ...mapActions(["AUTH_REQUEST"])
+  }
+};
 </script>
 
 <style scoped>

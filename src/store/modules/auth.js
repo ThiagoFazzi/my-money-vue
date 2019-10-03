@@ -1,84 +1,91 @@
 // import { SIGN_IN } from '../actions/signIn';
-import axios from 'axios';
-import { signUp } from '../actions/signUp';
+import axios from "axios";
+import { signUp } from "../actions/signUp";
+import USER_REQUEST from "./user";
+
+function transformData(string) {
+  return JSON.parse(string);
+}
 
 const state = {
-  userLogged: '',
-  user: '',
+  auth: transformData(localStorage.getItem("auth")) || "",
+  status: ""
 };
 
 const getters = {
-  USER_LOGGED: state => state.userLogged,
-  USER_TOKEN: state => state.userLogged.token,
+  isAuthenticated: state => !!state.auth.token,
+  status: state => state.status,
+  userId: state => state.auth.userId,
+  getToken: state => state.auth.token
+  //GET_AUTH: state => state.auth,
+  //GET_TOKEN: state => state.auth.token
 };
 
 const actions = {
-  signOut(context) {
-    context.commit('SIGN_OUT');
-    return 'signOut';
+  signOut({ commit }) {
+    commit("AUTH_LOGOUT");
+    localStorage.removeItem("auth");
+    return "signOut";
   },
-  async SIGN_IN({ commit }, { email, password }) {
+  async AUTH_REQUEST({ commit, dispatch }, { email, password }) {
     try {
       const response = await axios.post(
-        'http://localhost:3000/graphql',
+        "http://localhost:3000/graphql",
         {
           query: `query signin($email: String!, $password: String!) { 
             signIn(email: $email, password: $password) { 
               userId
               token
               tokenExpiration
-              user {
-                _id
-                userName
-                email
-                photo
-                createdDate
-                updatedDate
-              }
             }
           }`,
           variables: {
             email,
-            password,
-          },
+            password
+          }
         },
         {
           headers: {
-            'Content-Type': 'application/json',
-          },
-        },
+            "Content-Type": "application/json"
+          }
+        }
       );
       if (response.status === 200) {
-        commit('SIGN_IN', response.data.data.signIn);
+        localStorage.setItem("auth", JSON.stringify(response.data.data.signIn));
+        commit("AUTH_SUCCESS", response.data.data.signIn);
+        //dispatch(USER_REQUEST);
       }
       return response.data;
     } catch (error) {
+      commit("AUTH_ERROR", error);
+      localStorage.removeItem("auth");
       throw error;
     }
   },
 
-  signUp,
+  signUp
 };
 
 const mutations = {
-  SIGN_IN(state, {
- token, tokenExpiration, userId, user 
-}) {
-    state.userLogged = {
-      token,
-      tokenExpiration,
-      userId,
-    };
-    state.user = user;
+  AUTH_SUCCESS(state, { token, tokenExpiration, userId }) {
+    (state.status = "success"),
+      (state.auth = {
+        token,
+        tokenExpiration,
+        userId
+      });
   },
-  SIGN_OUT(state) {
-    state.userLogged = '';
+  AUTH_LOGOUT(state) {
+    state.auth = "";
   },
+  AUTH_ERROR(state) {
+    state.status = " error";
+  }
 };
 
 export default {
   state,
   getters,
   actions,
-  mutations,
+  mutations
 };
