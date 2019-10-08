@@ -19,7 +19,7 @@ const getters = {
 };
 
 const actions = {
-  signOut({ commit }) {
+  AUTH_LOGOUT({ commit }) {
     commit("AUTH_LOGOUT");
     localStorage.removeItem("auth");
     return "signOut";

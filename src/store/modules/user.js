@@ -10,7 +10,7 @@ const getters = {
 };
 
 const actions = {
-  async USER_REQUEST({ getters, commit }, userId) {
+  async USER_REQUEST({ getters, commit, dispatch }, userId) {
     try {
       const response = await axios.post(
         "http://localhost:3000/graphql",
@@ -36,11 +36,16 @@ const actions = {
           }
         }
       );
-      if (response.status === 200) {
+      if (response.data.errors) {
+        console.log("return errors");
+        return response.data.errors;
+      } else if (response.status === 200) {
+        console.log("commit valid user");
         commit("SET_USER_SUCCESS", response.data.data.getUser);
+        return response.data.data.getUser;
       }
-      return response.data;
     } catch (error) {
+      dispatch("AUTH_LOGOUT");
       throw error;
     }
   }
