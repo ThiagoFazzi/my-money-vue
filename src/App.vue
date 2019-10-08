@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Toolbar v-if="getUserId" />
+    <Toolbar v-if="getUser" />
     <v-content class="background">
       <router-view></router-view>
     </v-content>
@@ -17,7 +17,7 @@ export default {
     Toolbar
   },
   computed: {
-    ...mapGetters(["getUserId"])
+    ...mapGetters(["getUser"])
   }
 };
 </script>

@@ -30,9 +30,7 @@ export default {
   created() {
     this.USER_REQUEST(this.getUserId)
       .then(response => {
-        console.log(response);
         if (response._id === this.getUserId) {
-          console.log(response);
         } else if (!response._id) {
           const message = response.map(item => {
             this.message = item.message;
